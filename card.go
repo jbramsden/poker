@@ -61,7 +61,8 @@ func (c *Card) UnmarshalJSON(b []byte) error {
 }
 
 func (c Card) String() string {
-	return string(strRanks[c.Rank()]) + string(intSuitToCharSuit[c.Suit()])
+	//return string(strRanks[c.Rank()]) + string(intSuitToCharSuit[c.Suit()])
+	return string(strRanks[c.Rank()]) + prettySuits[int(c.Suit())]
 }
 
 func (c Card) Rank() int32 {

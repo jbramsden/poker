@@ -4,6 +4,14 @@
 
 Poker is ported from the Python library [worldveil/deuces](https://github.com/worldveil/deuces).
 
+## Changes on this fork
+
+1) Added NewEmpty to Deck to be able to add an empty deck of cards. Use case when you want players to have a container ready to be dealt cards.
+2) Added Deal to Deck to be able to deal X number of cards to other decks. 
+4) Added ConCat to Deck which will concatenate of deck of cards to another deck of cards
+5) Added Cards function to Deck which returns a slice of cards. E.G Exposing the card attribute.
+6) Changed String in Card so that it uses prettyprint on the suite.
+
 ## Installation
 
 Use `go get` to install Poker:
