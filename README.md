@@ -30,35 +30,80 @@ package main
 import (
 	"fmt"
 
-	"github.com/chehsunliu/poker"
+	"github.com/jbramsden/poker"
 )
 
 func main() {
-	deck := poker.NewDeck()
-	hand := deck.Draw(7)
-	fmt.Println(hand)
 
-	rank := poker.Evaluate(hand)
-	fmt.Println(rank)
-	fmt.Println(poker.RankString(rank))
+	//Texas Hold'em example with 2 hands.
+	deck := poker.NewDeck()
+	handA := poker.NewEmpty()
+	handB := poker.NewEmpty()
+	table := poker.NewEmpty()
+
+	//Deal 2 cards to handA and handB
+	deck.Deal(2, handA, handB)
+	fmt.Printf("HandA - %s, HandB - %s\n", handA, handB)
+
+	//Deal 3 cards to the table
+	deck.Deal(3, table)
+	fmt.Printf("Table - %s\n", table)
+
+	//Deal 1 card to the table
+	deck.Deal(1, table)
+	fmt.Printf("Table - %s\n", table)
+
+	//Deal final card to the table
+	deck.Deal(1, table)
+	fmt.Printf("Table - %s\n", table)
+
+	handAFinal := table.ConCat(handA)
+	handBFinal := table.ConCat(handB)
+
+	fmt.Printf("A - %s | B - %s\n", handAFinal, handBFinal)
+	handAScore := poker.Evaluate(handAFinal.Cards())
+	handBScore := poker.Evaluate(handBFinal.Cards())
+
+	fmt.Printf("hand A score %d, Hand B Score %d\n", handAScore, handBScore)
+	if handAScore < handBScore {
+		fmt.Printf("Hand A is winner with %s\n", poker.RankString(handAScore) )
+	}else if handBScore < handAScore {
+		fmt.Printf("Hand B is winner with %s\n", poker.RankString(handBScore) )
+	}else{
+		fmt.Printf("It is a draw!")
+	}
+
 }
 ```
 
 ```sh
-$ go run ./main.go
-[Kd 4h Qh 3s 8s 5h Jd]
-6695
-High Card
+$ go run main.go
+HandA - 6♠9❤, HandB - 2♦6♣
+Table - J♠8♠5♠
+Table - J♠8♠5♠5♦
+Table - J♠8♠5♠5♦9♠
+A - 6♠9❤J♠8♠5♠5♦9♠ | B - 2♦6♣J♠8♠5♠5♦9♠
+hand A score 1414, Hand B Score 5449
+Hand A is winner with Flush
 
-$ go run ./main.go
-[4c Qh Ad 9c 9s 3h 4d]
-3062
-Two Pair
+$ go run main.go
+HandA - 5❤5♣, HandB - 7❤Q♠
+Table - 8♦K♣J♠
+Table - 8♦K♣J♠9❤
+Table - 8♦K♣J♠9❤J♣
+A - 5❤5♣8♦K♣J♠9❤J♣ | B - 7❤Q♠8♦K♣J♠9❤J♣
+hand A score 2887, Hand B Score 4042
+Hand A is winner with Two Pair
 
-$ go run ./main.go
-[Jh Qd Kd Qs 7d As Qh]
-1742
-Three of a Kind
+
+$ go run main.go
+HandA - 8♣K❤, HandB - J♣9♣
+Table - J❤A♠Q❤
+Table - J❤A♠Q❤4♣
+Table - J❤A♠Q❤4♣3♠
+A - 8♣K❤J❤A♠Q❤4♣3♠ | B - J♣9♣J❤A♠Q❤4♣3♠
+hand A score 6187, Hand B Score 3997
+Hand B is winner with Pair
 ```
 
 ## Performance

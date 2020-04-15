@@ -1,3 +1,5 @@
+github.com/chehsunliu/poker v0.0.0-20190908163705-e602358ef561 h1:sBou+ERUuGw3Qjnhu1QLpqCAzp02F1NvcRFtxFCLu0Q=
+github.com/chehsunliu/poker v0.0.0-20190908163705-e602358ef561/go.mod h1:V6K4yyDbafp0k6lUnYbwoTS/KsHSB1EWiJdEk54uB1w=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/loganjspears/joker v0.0.0-20180219043703-3f2f69a75914 h1:yAIlIiOkdoJvqd5xtWzM9tNDpLZrFfJdpnNSKha78G8=
